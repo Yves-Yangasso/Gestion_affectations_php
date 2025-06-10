@@ -1,0 +1,35 @@
+.header{
+    position: fixed;
+    display: block;
+    width: 21%;
+    height: 100vh;
+    border: 1px solid #ccc;
+    background-image: linear-gradient(to right, #fff, #bea5a9);
+    z-index: 0;
+}
+
+nav ul li{
+    position: relative;
+    list-style: none;
+    padding: 10px 0;
+    /* text-align: center; */
+
+}
+
+nav ul li a{
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 5px 5px;
+    display: block;
+    width: 150px;
+}
+
+nav ul li a:hover{
+    background-image: linear-gradient(to right, #fff, #fff);
+    color: teal;
+    border-radius: 5px;
+    padding: 5px 5px;
+    /* border: 2px solid red; */
+}
