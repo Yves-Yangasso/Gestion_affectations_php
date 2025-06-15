@@ -1,7 +1,41 @@
+   
+  <?php
+
+include_once "./db/db_connexion.php";
+include_once "./db/fonctions.php";
+
+$filieres = getAllFiliere();
+
+  $message = "";
+  
+   if(isset($_POST['submit'])){
+    $nom = $_POST['nom'];
+    $adresse = $_POST['adresse'];
+    $sexe = $_POST['sexe'];
+    $telephone = $_POST['telephone'];
+    $email = $_POST['email'];
+    $matricule = $_POST['matricule'];
+    $niveau = $_POST['niveau'];
+    $filiere = $_POST['filiere'];
+    
+    $user = setEtudiant($nom,$adresse,$sexe, $telephone, $matricule,$email, $niveau, $filiere);
+        header('location:index.php?action=etudiant');
+    if($user){
+        
+    }else{
+        $message = "impossible d'ajoute l'utilisateur";
+    }
+
+ }
+  
+  
+  ?>
+ 
+ 
  <div class="formulaireUtilisateurs">
         <div>
             <h3 class="shadow p-3 my-3">Ajouter un nouvel etudiant</h3>
-            <form action="ajouterUtilisateur.php" method="POST">
+            <form action="" method="POST">
 
 
             <div class="row">
@@ -23,7 +57,7 @@
                 </div>
                 <div class="col-lg-6">
                      <label for="sexe">Sexe</label>
-                     <select name="sexe" id="sexe">
+                     <select name="sexe" id="sexe" class="form-control">
                         <option disabled selected value="">____________Selectionnez le sexe_______________</option>
                         <option value="Homme">Homme</option>
                         <option value="Femme">Femme</option>
@@ -64,33 +98,21 @@
                      <label for="filiere">Filière</label>
                     <select name="filiere" id="filiere" class="form-select">
                         <option disabled selected value="">____________Selectionnez la filière_______________</option>
-                        <option value="Informatique">Informatique</option>
-                        <option value="Mathematiques">Mathematiques</option>
-                        <option value="Physique">Physique</option>
-                        <option value="Chimie">Chimie</option>
-                        <option value="Biologie">Biologie</option>
-                        <option value="Sciences de la Terre">Sciences de la Terre</option>
-                        <option value="Sciences Economiques">Sciences Economiques</option>
-                        <option value="Sciences Sociales">Sciences Sociales</option>
-                        <option value="Sciences de l'Ingénieur">Sciences de l'Ingénieur</option>
-                        <option value="Sciences de la Santé">Sciences de la Santé</option>
+
+
+                      <?php
+                        foreach ($filieres as $fil) {
+                        ?>
+                        <option value="<?php  echo $fil['id_filiere'];  ?>"><?php  echo $fil['libelle']; ?></option>
+                     <?php    } ?> 
                     </select>
                 </div>
-                <div class="col-lg-6">
-                    <label for="utilisateur">Utilisateur</label>
-                    <select name="" id="">
-                        <option disabled selected value="">____________Selectionnez le type d'utilisateur_______________</option>
-                        <option value="Etudiant">Etudiant</option>
-                        <option value="Enseignant">Enseignant</option>
-                        <option value="Administrateur">Administrateur</option>
-                    </select>
-        
-                </div>
+               
             </div>
         
                  
     
-                <button type="submit" class="">Ajouter</button>
+                <button type="submit" name="submit" class="btn btn-primary mt-2">Ajouter</button>
             </form>
 
         </div>

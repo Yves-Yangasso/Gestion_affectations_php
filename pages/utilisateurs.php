@@ -1,8 +1,20 @@
-  <div class="section container">
+ <?php 
+
+include_once "./db/db_connexion.php";
+include_once "./db/fonctions.php";
+
+$utilisateurs = getAllUsers();
+
+//var_dump($utilisateurs);
+
+?>
+ 
+ 
+ <div class="section container">
                 <div class="d-flex justify-content-around  align-items-center ">
                     <h3 class="gestUtilisateurs">Gestion des utilisateurs</h3>
 
-                  <a class="ajouter_nouvel " href="index.php?action=ajouterUtilisateur">Nouvel utilisateur</a>
+                  <a class="ajouter_nouvel  btn btn-primary" href="index.php?action=ajouterUtilisateur">Nouvel utilisateur</a>
                </div>
                 <hr class="">
                 <!-- <img src="/images/AFF.jpeg" alt=""> -->
@@ -11,6 +23,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">ID</th>
+                                <th scope="col">Username</th>
                                 <th scope="col">Nom</th>
                                 <th scope="col">Prénom</th>
                                 <th scope="col">Email</th>
@@ -19,29 +32,27 @@
                             </tr>
                         </thead>
                         <tbody>
+
+                        <?php
+                        $id = 1;
+                        foreach ($utilisateurs as $user) {
+                        ?>
                             <tr>
-                                <td>1</td>
-                                <td>Koné</td>
-                                <td>Issa</td>
-                                <td>koneissa@gmail.com</td>
-                                <td>abidjan BP01</td>
+                                <td><?php  echo $id; ?></td>
+                                <td><?php   echo $user['username']; ?></td>
+                                <td><?php  echo $user['nom']; ?></td>
+                                <td><?php  echo $user['prenom']; ?></td>
+                                <td><?php  echo $user['email']; ?></td>
+                                <td><?php  echo $user['adresse']; ?></td>
                                 <td>
-                                    <a  href="#" class="btn btn modifier"> Modifier</a>
-                                    <a href="#" class="btn btn supprimer"> Supprimer</a>
+                                    <a  href="#" class="btn btn-success modifier"> Modifier</a>
+                                    <a href="#" class="btn btn-danger supprimer"> Supprimer</a>
                                 </td>
                                 
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Traoré</td>
-                                <td>Fatou</td>
-                                <td>traorefatou@gmail.com</td>
-                                <td>abidjan BP02</td>
-                                <td>
-                                    <a href="#" class="btn btn modifier">Modifier</a>
-                                    <a href="#" class="btn btn supprimer">Supprimer</a>
-                                </td>
-                            </tr>
+
+                        <?php $id++;   } ?>
+                           
                         </table> 
                     </div>
 </div>

@@ -1,29 +1,30 @@
 <?php
+include_once "../db/db_connexion.php";
+include_once "../db/fonctions.php";
 
 $message = "";
 
 session_start();
 
- include_once "../db/db_connexion.php";
-
  if(isset($_POST['submit'])){
     $email = $_POST['email'];
     $mdp = $_POST['mdp'];
 
-    $res = $conn->prepare("select * from utilisateurs where email = :email and motDepasse = :mdp");
-    $res->bindParam(':email', $email);
-    $res->bindParam(':mdp', $mdp);
-    $res->execute();
+    $user = checkConnexion($email, $mdp);
 
-    $user = $res->fetch(PDO::FETCH_ASSOC);
-
-    if($user['email'] == $email && $user['motDepasse'] == $mdp){
+    if($user){
+        if($user['email'] == $email && $user['motDepasse'] == $mdp){
         $_SESSION['email'] = $user['email'] ;
+        $_SESSION['id'] = $user['id_utilisateur'] ;
 
         header('location:../index.php');
     }else{
         $message = "Mot de passe incorrect !!!";
     }
+    }else{
+        $message = "Mot de passe incorrect !!!";
+    }
+ 
  }
 
 ?>

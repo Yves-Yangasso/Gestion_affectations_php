@@ -1,9 +1,21 @@
+ <?php 
+
+include_once "./db/db_connexion.php";
+include_once "./db/fonctions.php";
+
+$instituts = getAllInstitut();
+
+//var_dump($utilisateurs);
+
+?>
+
+
 
             <div class="section container">
                 <div class="d-flex justify-content-around  align-items-center ">
                     <h3 class="gestUtilisateurs">Gestion des instituts</h3>
 
-                  <a class="ajouter_nouvel " href="index.php?action=ajouterInstitut">Nouvel institut</a>
+                  <a class="ajouter_nouvel btn btn-primary" href="index.php?action=ajouterInstitut">Nouvel institut</a>
                </div>
                 <hr class="">
                 <!-- <img src="/images/AFF.jpeg" alt=""> -->
@@ -20,19 +32,24 @@
                             </tr>
                         </thead>
                         <tbody>
+
+                         <?php
+                        $id = 1;
+                        foreach ($instituts as $institut) {
+                        ?>
                             <tr>
-                                <td>1</td>
-                                <td>Université Félix Houphoët Boigny</td>
-                                <td>Cocody-BP108</td>
-                                <td>07 23 56 45 67</td>
-                                <td>campuscocody@gmail.com</td>
+                                <td><?php  echo $id; ?></td>
+                                <td><?php   echo $institut['nom']; ?></td>
+                                <td><?php   echo $institut['adresse']; ?></td>
+                                <td><?php   echo $institut['telephone']; ?></td>
+                                <td><?php   echo $institut['email']; ?></td>
                                 <td>
-                                    <a  href="#" class="btn btn modifier"> Modifier</a>
-                                    <a href="#" class="btn btn supprimer"> Supprimer</a>
+                                    <a  href="#" class="btn btn-success modifier"> Modifier</a>
+                                    <a href="#" class="btn btn-danger supprimer"> Supprimer</a>
                                 </td>
                             </tr>
 
-
+                             <?php $id++;   } ?>
 
                             <!-- <tr>
                                 <td>2</td>

@@ -1,4 +1,34 @@
-    <div class="formulaireUtilisateurs">
+  
+    
+  <?php
+
+include_once "./db/db_connexion.php";
+include_once "./db/fonctions.php";
+
+  $message = "";
+  
+   if(isset($_POST['submit'])){
+    $nom = $_POST['nom'];
+    $telephone = $_POST['telephone'];
+    $adresse = $_POST['adresse'];
+    $email = $_POST['email'];
+
+    $ins = setInstitut($nom, $telephone,$email, $adresse);
+        header('location:index.php?action=institut');
+    if($ins){
+        
+    }else{
+        $message = "impossible d'ajoute l'institut";
+    }
+
+ }
+  
+  
+  ?>
+  
+  
+  
+  <div class="formulaireUtilisateurs">
         <div>
             <h3 class="shadow p-3 my-3">Ajouter un nouvel institut</h3>
             <form action="" method="POST">
@@ -27,7 +57,7 @@
                     </div>
                 </div>
 
-                <button type="submit" class="">Ajouter</button>
+                <button type="submit" name="submit" class="btn btn-primary mt-2">Ajouter</button>
             </form>
 
         </div>

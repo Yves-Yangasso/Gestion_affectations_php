@@ -1,7 +1,33 @@
+     
+  <?php
+
+include_once "./db/db_connexion.php";
+include_once "./db/fonctions.php";
+
+  $message = "";
+  
+   if(isset($_POST['submit'])){
+    $libelle = $_POST['libelle'];
+    $description = $_POST['description'];
+
+    $ins = setFiliere($libelle, $description);
+        header('location:index.php?action=filiere');
+    if($ins){
+        
+    }else{
+        $message = "impossible d'ajoute de la filiere";
+    }
+
+ }
+  
+  
+  ?>
+  
+ 
  <div class="formulaireUtilisateurs">
         <div>
             <h3 class="shadow p-3 my-3">Ajouter un nouvelle filière</h3>
-            <form action="ajouterUtilisateur.php" method="POST">
+            <form action="" method="POST">
         
                     <label for="libelle" class="form-label">Libellé</label>
                     <input type="text" class="form-control" id="libelle" name="libelle" required>
@@ -11,7 +37,7 @@
                     <input type="text" class="form-control" id="description" name="description" required>
             
                 
-                <button type="submit" class="">Ajouter</button>
+                <button type="submit" name="submit" class="btn btn-primary mt-2">Ajouter</button>
             </form>
 
         </div>
